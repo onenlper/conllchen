@@ -10,7 +10,9 @@ import model.Entity;
 import model.EntityMention;
 import model.CoNLL.CoNLLDocument;
 import model.CoNLL.CoNLLPart;
+import model.CoNLL.CoNLLSentence;
 import model.CoNLL.OntoCorefXMLReader;
+import model.syntaxTree.MyTreeNode;
 import util.Common;
 
 public class ZeroCorefTrain extends ZeroCoref {
@@ -68,6 +70,7 @@ public class ZeroCorefTrain extends ZeroCoref {
 				Collections.sort(candidates);
 				this.assignVNode(goldInChainZeroses, part);
 				this.assignNPNode(goldBoundaryNPMentions, part);
+				
 				for (EntityMention zero : goldInChainZeroses) {
 					if (zero.notInChainZero) {
 						System.out.println("NOt happen");
@@ -172,8 +175,6 @@ public class ZeroCorefTrain extends ZeroCoref {
 			}
 		}
 		fea.freeze();
-		// Common.outputHashSet(gram2, "gram2." + folder);
-		// Common.outputHashSet(gram3, "gram3." + folder);
 		return instances;
 	}
 
