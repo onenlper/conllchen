@@ -143,9 +143,9 @@ public class ZeroCorefTrainEntity extends ZeroCoref {
 							ArrayList<EntityMention> wholecluster = clusterMap.get(cand.toName());
 							ArrayList<EntityMention> cluster = new ArrayList<EntityMention>();
 							for (EntityMention cant : wholecluster) {
-								 if(cant.compareTo(zero)<0) {
+//								 if(cant.compareTo(zero)<0) {
 								cluster.add(cant);
-								 }
+//								 }
 							}
 
 							HashMap<Integer, Integer> feaMap = new HashMap<Integer, Integer>();
