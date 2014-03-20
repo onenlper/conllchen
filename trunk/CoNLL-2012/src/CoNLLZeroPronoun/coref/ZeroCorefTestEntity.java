@@ -227,9 +227,9 @@ public class ZeroCorefTestEntity extends ZeroCoref {
 					ArrayList<EntityMention> wholecluster = clusterMap.get(cand.toName());
 					ArrayList<EntityMention> cluster = new ArrayList<EntityMention>();
 					for (EntityMention cant : wholecluster) {
-						 if(cant.compareTo(zero)<0) {
+//						 if(cant.compareTo(zero)<0) {
 						cluster.add(cant);
-						 }
+//						 }
 					}
 
 					HashMap<Integer, Integer> feaMap = new HashMap<Integer, Integer>();
@@ -287,18 +287,18 @@ public class ZeroCorefTestEntity extends ZeroCoref {
 			Common.outputLines(svmRankCRs, "svmRankCR.test");
 			double probAnt[] = new double[cands.size()];
 
-			double probAntSVMMR[] = new double[svmRankMRs.size()];
-			for(int i=0;i<svmRankMRs.size();i++) {
-				probAntSVMMR[i] = this.modelMR.classify(Common.SVMStringToFeature(svmRankMRs.get(i)));
-			}
-			probAnt = probAntSVMMR;
-			 
-//			double probAntSVMCR[] = new double[svmRankCRs.size()];
-//			for (int i = 0; i < svmRankCRs.size(); i++) {
-//				String line = svmRankCRs.get(i);
-//				probAntSVMCR[i] = this.model.classify(Common.SVMStringToFeature(line));
+//			double probAntSVMMR[] = new double[svmRankMRs.size()];
+//			for(int i=0;i<svmRankMRs.size();i++) {
+//				probAntSVMMR[i] = this.modelMR.classify(Common.SVMStringToFeature(svmRankMRs.get(i)));
 //			}
-//			probAnt = probAntSVMCR;
+//			probAnt = probAntSVMMR;
+			 
+			double probAntSVMCR[] = new double[svmRankCRs.size()];
+			for (int i = 0; i < svmRankCRs.size(); i++) {
+				String line = svmRankCRs.get(i);
+				probAntSVMCR[i] = this.model.classify(Common.SVMStringToFeature(line));
+			}
+			probAnt = probAntSVMCR;
 
 			if (probAnt.length != 0) {
 				int rankID = -1;
@@ -311,8 +311,8 @@ public class ZeroCorefTestEntity extends ZeroCoref {
 						rankID = i;
 					}
 				}
-//				antecedent = cands.get(clusterIdMap.get(rankID));
-				antecedent = cands.get(idMap.get(rankID));
+				antecedent = cands.get(clusterIdMap.get(rankID));
+//				antecedent = cands.get(idMap.get(rankID));
 			}
 
 			if (antecedent != null) {
