@@ -548,7 +548,7 @@ public class ZeroCorefFea extends YYFeature {
 				strFeas.add("#");
 			}
 		}
-		 strFeas.add(this.semStr);
+//		 strFeas.add(this.semStr);
 		// strFeas.clear();
 		return strFeas;
 	}
@@ -585,16 +585,20 @@ public class ZeroCorefFea extends YYFeature {
 		int sentenceDis = Math.abs(zero.sentenceID - cand.sentenceID);
 		sentenceDis = sentenceDis > 30 ? 30 : sentenceDis;
 		
-		if(zero.sentenceID>cand.sentenceID) {
+		if(zero.sentenceID>=cand.sentenceID) {
 		features.add(new Feature(sentenceDis, 1, 62));
 		} else {
-			features.add(new Feature(sentenceDis + 30, 1, 62));
+			features.add(new Feature(sentenceDis + 31, 1, 62));
 		}
-		if(zero.start>cand.start) {
-			features.add(new Feature(0, 1, 2));
-		} else {
-			features.add(new Feature(1, 1, 2));
-		}
+//		if(zero.start>cand.start) {
+//			features.add(new Feature(0, 1, 2));
+//		} else {
+//			features.add(new Feature(1, 1, 2));
+//		}
+//				int sentenceDis = zero.sentenceID - cand.sentenceID;
+//		sentenceDis = sentenceDis > 30 ? 30 : sentenceDis;
+//		features.add(new Feature(sentenceDis, 1, 31));
+		
 		
 		int segmentDis = 0;
 		for (int i = cand.start; i <= zero.start; i++) {
