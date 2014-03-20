@@ -510,9 +510,9 @@ public class ZeroCorefFea extends YYFeature {
 		ArrayList<String> strFeas = new ArrayList<String>();
 		if (group1) {
 			strFeas.add(canHead);
-			// strFeas.add(canHead + "#" + this.getPredicate(zero.V));
-			// strFeas.add(canHead + "#" + this.getPredicate(zero.V) + "#" +
-			// this.getObjectNP(zero));
+			 strFeas.add(canHead + "#" + this.getPredicate(zero.V));
+			 strFeas.add(canHead + "#" + this.getPredicate(zero.V) + "#" +
+			 this.getObjectNP(zero));
 		}
 		if (group2) {
 			MyTreeNode v1 = cand.V;
@@ -540,7 +540,7 @@ public class ZeroCorefFea extends YYFeature {
 //						this.printZero(zero, part);
 //						System.out.println("================= " + path);
 //						System.out.println("================= " + conllPath);
-						System.out.println(cand.extent + "-" + pred1N.value);
+//						System.out.println(cand.extent + "-" + pred1N.value);
 					}
 				}
 				strFeas.add(pred1 + "#" + pred2);
@@ -548,7 +548,7 @@ public class ZeroCorefFea extends YYFeature {
 				strFeas.add("#");
 			}
 		}
-		// strFeas.add(this.semStr);
+		 strFeas.add(this.semStr);
 		// strFeas.clear();
 		return strFeas;
 	}
@@ -582,10 +582,20 @@ public class ZeroCorefFea extends YYFeature {
 
 	public ArrayList<Feature> getZeroAnaphorFeature() {
 		ArrayList<Feature> features = new ArrayList<Feature>();
-		int sentenceDis = zero.sentenceID - cand.sentenceID;
+		int sentenceDis = Math.abs(zero.sentenceID - cand.sentenceID);
 		sentenceDis = sentenceDis > 30 ? 30 : sentenceDis;
-		features.add(new Feature(sentenceDis, 1, 31));
-
+		
+		if(zero.sentenceID>cand.sentenceID) {
+		features.add(new Feature(sentenceDis, 1, 62));
+		} else {
+			features.add(new Feature(sentenceDis + 30, 1, 62));
+		}
+		if(zero.start>cand.start) {
+			features.add(new Feature(0, 1, 2));
+		} else {
+			features.add(new Feature(1, 1, 2));
+		}
+		
 		int segmentDis = 0;
 		for (int i = cand.start; i <= zero.start; i++) {
 			String word = part.getWord(i).word;
