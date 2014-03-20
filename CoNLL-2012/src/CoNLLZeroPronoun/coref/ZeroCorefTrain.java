@@ -111,7 +111,10 @@ public class ZeroCorefTrain extends ZeroCoref {
 					// System.out.println("----");
 					for (EntityMention cand : candidates) {
 						cand.sentenceID = part.getWord(cand.start).sentence.getSentenceIdx();
-						if (cand.compareTo(zero) < 0 && cand.compareTo(antecedent) >= 0) {
+						if (cand.compareTo(zero) < 0 && 
+								cand.compareTo(antecedent) >= 0
+//								zero.sentenceID - cand.sentenceID<=2 		
+						) {
 							fea.set(goldInChainZeroses, candidates, cand, zero, part);
 							if (chainMap.containsKey(cand.toName()) && chainMap.containsKey(zero.toName())) {
 								fea.label = chainMap.containsKey(cand.toName())
