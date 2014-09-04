@@ -28,6 +28,8 @@ public class CombineResults {
 		Common.outputLines(total, "/users/yzcchen/chen3/conll12/chinese/key.chinese." + mode + "." + track);
 		
 		Common.outputLines(totalGold, "/users/yzcchen/chen3/conll12/chinese/key.gold");
+		System.out.println("System output: " + "/users/yzcchen/chen3/conll12/chinese/key.chinese." + mode + "." + track);
+		System.out.println("Gold output: " + "/users/yzcchen/chen3/conll12/chinese/key.gold");
 		System.out.println("combined");
 	}
 	
